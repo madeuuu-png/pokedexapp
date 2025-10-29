@@ -1,34 +1,28 @@
 // components/Button.tsx
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 
 interface ButtonProps {
   title: string;
   onPress: () => void;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+  className?: string;
+  textClassName?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({ title, onPress, style, textStyle }) => {
+export const Button: React.FC<ButtonProps> = ({ 
+  title, 
+  onPress, 
+  className = '', 
+  textClassName = '' 
+}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
-      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
+    <TouchableOpacity 
+      onPress={onPress} 
+      className={`bg-pokemon-pink py-3 px-6 rounded-full items-center justify-center ${className}`}
+    >
+      <Text className={`text-pokemon-dark text-base font-bold ${textClassName}`}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#FF6B9D',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#0a0a0a',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
