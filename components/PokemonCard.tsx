@@ -1,9 +1,8 @@
 // components/PokemonCard.tsx
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Pokemon } from '../types/pokemon';
 import { TypeChip } from './TypeChip';
-import { colors } from '../utils/colors';
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -12,21 +11,31 @@ interface PokemonCardProps {
 
 export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
-      <Text style={styles.cardId}>
+    <TouchableOpacity 
+      onPress={onPress} 
+      className="w-[48%] bg-pokemon-card rounded-2xl p-4 mb-4 items-center border-2 border-pokemon-border shadow-lg"
+      style={{ 
+        shadowColor: '#FF6B9D',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 5,
+      }}
+    >
+      <Text className="text-pokemon-purple text-xs self-end font-bold">
         #{String(pokemon.id).padStart(3, '0')}
       </Text>
       
       <Image
         source={{ uri: pokemon.sprites.other['official-artwork'].front_default }}
-        style={styles.cardImage}
+        className="w-24 h-24 my-2"
       />
       
-      <Text style={styles.cardName}>
+      <Text className="text-pokemon-light-pink text-lg font-bold capitalize text-center">
         {pokemon.name}
       </Text>
       
-      <View style={styles.cardTypesContainer}>
+      <View className="flex-row mt-2 gap-1 flex-wrap justify-center">
         {pokemon.types.map((type) => (
           <TypeChip 
             key={type.type.name} 
@@ -38,46 +47,3 @@ export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, onPress }) =>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    width: '48%',
-    backgroundColor: colors.cardBackground,
-    borderRadius: 20,
-    padding: 15,
-    marginBottom: 15,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: colors.border,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  cardId: {
-    color: colors.tertiary,
-    fontSize: 12,
-    alignSelf: 'flex-end',
-    fontWeight: 'bold',
-  },
-  cardImage: {
-    width: 100,
-    height: 100,
-    marginVertical: 10,
-  },
-  cardName: {
-    color: colors.secondary,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-    textAlign: 'center',
-  },
-  cardTypesContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-    gap: 5,
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-});
