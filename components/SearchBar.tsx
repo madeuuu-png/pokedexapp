@@ -1,7 +1,6 @@
 // components/SearchBar.tsx
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
-import { colors } from '../utils/colors';
+import { TextInput } from 'react-native';
 
 interface SearchBarProps {
   value: string;
@@ -16,23 +15,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <TextInput
-      style={styles.searchInput}
+      className="bg-pokemon-input text-pokemon-light-pink p-4 rounded-3xl text-base border-2 border-pokemon-border"
       placeholder={placeholder}
-      placeholderTextColor={colors.tertiary}
+      placeholderTextColor="#B084CC"
       value={value}
       onChangeText={onChangeText}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  searchInput: {
-    backgroundColor: colors.inputBackground,
-    color: colors.secondary,
-    padding: 15,
-    borderRadius: 25,
-    fontSize: 16,
-    borderWidth: 2,
-    borderColor: colors.border,
-  },
-});
