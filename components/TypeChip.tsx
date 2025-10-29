@@ -1,6 +1,6 @@
 // components/TypeChip.tsx
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { getTypeColor } from '../utils/colors';
 
 interface TypeChipProps {
@@ -10,41 +10,16 @@ interface TypeChipProps {
 
 export const TypeChip: React.FC<TypeChipProps> = ({ typeName, size = 'small' }) => {
   const isLarge = size === 'large';
+  const backgroundColor = getTypeColor(typeName);
   
   return (
     <View 
-      style={[
-        isLarge ? styles.typeChipLarge : styles.typeChipSmall,
-        { backgroundColor: getTypeColor(typeName) }
-      ]}
+      className={`${isLarge ? 'py-2 px-5 rounded-2xl' : 'py-1 px-2.5 rounded-xl'}`}
+      style={{ backgroundColor }}
     >
-      <Text style={isLarge ? styles.typeTextLarge : styles.typeTextSmall}>
+      <Text className={`text-pokemon-dark font-bold capitalize ${isLarge ? 'text-sm' : 'text-xs'}`}>
         {typeName}
       </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  typeChipSmall: {
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 15,
-  },
-  typeChipLarge: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-  },
-  typeTextSmall: {
-    color: '#0a0a0a',
-    fontSize: 10,
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-  },
-  typeTextLarge: {
-    color: '#0a0a0a',
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-  },
-});
