@@ -1,7 +1,6 @@
 // components/StatBar.tsx
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../utils/colors';
+import { View, Text } from 'react-native';
 
 interface StatBarProps {
   statName: string;
@@ -17,55 +16,21 @@ export const StatBar: React.FC<StatBarProps> = ({
   const percentage = (statValue / maxValue) * 100;
   
   return (
-    <View style={styles.statRow}>
-      <View style={styles.statHeader}>
-        <Text style={styles.statName}>
+    <View className="mb-4">
+      <View className="flex-row justify-between mb-1">
+        <Text className="text-pokemon-light-pink capitalize text-sm">
           {statName.replace('-', ' ')}
         </Text>
-        <Text style={styles.statValue}>
+        <Text className="text-pokemon-pink font-bold text-sm">
           {statValue}
         </Text>
       </View>
-      <View style={styles.statBarBackground}>
+      <View className="h-2.5 bg-pokemon-input rounded-md overflow-hidden">
         <View
-          style={[
-            styles.statBarFill,
-            { width: `${percentage}%` }
-          ]}
+          className="h-full bg-pokemon-pink rounded-md"
+          style={{ width: `${percentage}%` }}
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  statRow: {
-    marginBottom: 15,
-  },
-  statHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 5,
-  },
-  statName: {
-    color: colors.secondary,
-    textTransform: 'capitalize',
-    fontSize: 14,
-  },
-  statValue: {
-    color: colors.primary,
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-  statBarBackground: {
-    height: 10,
-    backgroundColor: colors.inputBackground,
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  statBarFill: {
-    height: '100%',
-    backgroundColor: colors.primary,
-    borderRadius: 5,
-  },
-});
