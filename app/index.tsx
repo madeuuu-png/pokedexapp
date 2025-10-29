@@ -1,12 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Pokemon } from '../types/pokemon';
 import { PokemonCard } from '../components/PokemonCard';
 import { PokemonDetail } from '../components/PokemonDetail';
 import { SearchBar } from '../components/SearchBar';
 import { LoadingScreen } from '../components/LoadingScreen';
-import { colors } from '../utils/colors';
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
@@ -59,10 +58,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>✨ Pokédex ✨</Text>
-        <Text style={styles.subtitle}>
+    <View className="flex-1 bg-pokemon-dark">
+      <View className="pt-16 px-5 pb-5 bg-pokemon-card rounded-b-3xl">
+        <Text className="text-pokemon-light-pink text-4xl font-bold mb-2 text-center">
+          ✨ Pokédex ✨
+        </Text>
+        <Text className="text-pokemon-purple text-base mb-5 text-center">
           Descubre tus Pokémon favoritos 💜
         </Text>
         
@@ -72,8 +73,8 @@ export default function App() {
         />
       </View>
 
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.gridContainer}>
+      <ScrollView className="flex-1 px-5">
+        <View className="flex-row flex-wrap justify-between pb-5 pt-5">
           {filteredPokemon.map((pokemon) => (
             <PokemonCard
               key={pokemon.id}
@@ -86,42 +87,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    paddingTop: 60,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    backgroundColor: colors.cardBackground,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-  title: {
-    color: colors.secondary,
-    fontSize: 36,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  subtitle: {
-    color: colors.tertiary,
-    fontSize: 16,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  scrollView: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingBottom: 20,
-    paddingTop: 20,
-  },
-});
