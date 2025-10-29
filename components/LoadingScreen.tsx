@@ -1,7 +1,6 @@
 // components/LoadingScreen.tsx
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import { colors } from '../utils/colors';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 interface LoadingScreenProps {
   message?: string;
@@ -11,24 +10,11 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   message = "Cargando Pokémon... ✨" 
 }) => {
   return (
-    <View style={styles.loadingContainer}>
-      <ActivityIndicator size="large" color={colors.primary} />
-      <Text style={styles.loadingText}>{message}</Text>
+    <View className="flex-1 justify-center items-center bg-pokemon-dark">
+      <ActivityIndicator size="large" color="#FF6B9D" />
+      <Text className="text-pokemon-light-pink mt-5 text-lg font-semibold">
+        {message}
+      </Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.background,
-  },
-  loadingText: {
-    color: colors.secondary,
-    marginTop: 20,
-    fontSize: 18,
-    fontWeight: '600',
-  },
-});
